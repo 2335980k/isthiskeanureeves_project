@@ -19,7 +19,8 @@ def index(request):
     return render(request, 'isthiskeanureeves/index.html',context_dict)
 # Call keanuew page	
 def keanew(request):
-    return HttpResponse("This is the kea-new page")
+    context_dict = {}
+    return render(request, 'isthiskeanureeves/keanew.html',context_dict)
 # Call about page
 def about(request):
     context_dict = {}

@@ -1,13 +1,92 @@
 {% extends 'isthiskeanureeves/base_boot-strap.html' %}
 {% load staticfiles %}
 
-{% block title_block %}
-             
-{% endblock %}
+		
+		<link rel="stylesheet" type="text/css" href= "{% static "css/style.css" %}"> <!-- CSS -->
+		<link href="{% static 'css/image.css' %}" rel="stylesheet" type="text/css>
+		
+		{% block title %} - Not Keanu {% endblock %}
+		
+		
+		{% block body_block %}
+		<div class="container">
+		<div class="row">
+			<h1 class="display-3">Is This Keanu Reeves?</h1>
+			<br />
+			<h1 class="display-6"> - Kea-New!  </h2>
+		 </div>
+		{% if user.is_authenticated %}
+                <p class="text-success" class="display-3"> Welcome {{ user.username }}</p>
+                
+        {% else %}
+                <p class="text-primary" class="display-3"> Sign in to share your Keanu Reeves...</p>
+        {% endif %}
+		</div>
+ <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-4">
+          <h2>Heading</h2>
+          		<img  class="img-fluid" src="https://www.thejc.com/image/policy:1.461031:1521558383/.JPG?f=16x9&h=576&w=1024&$p$f$h$w=44172f4" class="img-fluid"/>
+
+          <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+          <h2>Heading</h2>
+         <img  class="img-fluid"src="https://www.cesarsway.com/sites/newcesarsway/files/styles/large_article_preview/public/Dog-bite-prevention.jpg?itok=3N2KTNkP" class="img-fluid" alt="Picture of a good boy" />
+          <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+       </div>
+        <div class="col-md-4">
+          <h2>Heading</h2>
+           <img  class="img-fluid" src="https://www.cesarsway.com/sites/newcesarsway/files/styles/large_article_preview/public/Common-dog-behaviors-explained.jpg?itok=FSzwbBoi" class="img-fluid" alt="Picture of a keanu" />
+          <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+        </div>
+      </div>
+	  
+	  
+	   <div class="row">
+        <div class="col-md-4">
+          <h2>Heading</h2>
+          		<img  class="img-fluid" src="https://dscsu8d79j5ty.cloudfront.net/sites/default/files/animal_images/00P0X00001JT2lxUAD.jpeg" class="img-fluid" alt="Nice of dog" />
+
+          <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+          <h2>Heading</h2>
+         <img   class="img-fluid" src="https://boygeniusreport.files.wordpress.com/2016/11/puppy-dog.jpg?quality=98&strip=all&w=782" class="img-fluid" alt="Picture of lil floofer" />
+          <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+       </div>
+        <div class="col-md-4">
+          <h2>Heading</h2>
+           <img   class="img-fluid" src="https://c.pxhere.com/photos/92/ac/wildlife_photography_pet_photography_dog_animal_nature_fun_comrade_dog_portrait-560234.jpg!d" class="img-fluid" alt="Coy" />
+          <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+        </div>
+      </div>
+	  
+	  <div class="row">
+        <div class="col-md-4">
+          <h2>Heading</h2>
+          		<img  class="img-fluid" src="https://dscsu8d79j5ty.cloudfront.net/sites/default/files/animal_images/00P0X00001JT2lxUAD.jpeg" class="img-fluid" alt="Nice of dog" />
+
+          <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+          <h2>Heading</h2>
+         <img  class="img-fluid" src="https://boygeniusreport.files.wordpress.com/2016/11/puppy-dog.jpg?quality=98&strip=all&w=782" class="img-fluid" alt="Picture of lil floofer" />
+          <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+       </div>
+        <div class="col-md-4">
+          <h2>Heading</h2>
+           <img  class="img-fluid" src="https://cdn.shopify.com/s/files/1/0673/5325/files/cecil_medium.jpg" class="img-fluid" alt="Coy" />
+          <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+        </div>
+      </div>
 
 
-{% block body_block %}
-    
-	
+      <hr>
+
+      <footer>
+        <p>&copy; Paul & Jun 2018</p>
+      </footer>
+    </div> <!-- /container -->
 {% endblock %}
-    
