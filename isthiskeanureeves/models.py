@@ -43,7 +43,7 @@ class UserProfile(models.Model):
    
     user = models.OneToOneField(User)
     #username_slug = models.SlugField(unique=True)
-    #website = models.URLField(blank=True)
+    email = models.URLField(blank=True)
     picture = models.ImageField(upload_to='profile_images', blank=True)
     
    # def save(self, *args, **kwargs):

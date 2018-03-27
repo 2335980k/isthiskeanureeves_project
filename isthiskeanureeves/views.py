@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from isthiskeanureeves.forms import UserForm, UserProfileForm, CategoryForm, PageForm
-from isthiskeanureeves.models import Category, Page
+from isthiskeanureeves.models import Category, Page, UserProfile
 
 
 # Call index
@@ -38,9 +38,12 @@ def login(request):
 def upload(request):
     return HttpResponse("This is the upload page")
 # Call userprofile
+@login_required
 def user_profile(request):
     context_dict = {}
-    return render(request, 'isthiskeanureeves/userprofile.html',context_dict)
+
+
+    return render(request, 'isthiskeanureeves/userprofile.html', context_dict)
 
 #register
 def register(request):
@@ -192,3 +195,21 @@ def add_page(request, category_name_slug):
                   print(form.errors)
        context_dict = {'form':form, 'category': category}
        return render(request, 'isthiskeanureeves/add_page.html', context_dict)
+
+# regiser profile
+@login_required
+def register_profile(request):
+     form = UserProfileForm()
+     if request.method == 'POST':
+           form = UserProfileForm(request.POST, request.FILES)
+           if form.is_valid():
+                 user_profile = form.save(commit=False)
+                 user_profile.user = request.user
+                 user_profile.save()
+                 
+                 return redirect('index')
+           else:
+                 print(form.errors)
+     context_dict = {'form':form}
+     
+     return render(request, 'isthiskeanureeves/profile_registration.html', context_dict)

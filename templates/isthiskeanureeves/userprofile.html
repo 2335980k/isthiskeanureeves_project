@@ -11,11 +11,9 @@
 	<div id="user_info">
 		<div id="photoFrame">
 			<!-- check user is currently the one logged in -->
-			{% if user.picture.picture %}
-			<img width="200" height="200" src="{{ MEDIA_URL }}{{picture.picture}}" alt="{{user.username}}'s profile picture"/>
-			{% else %}
-			<img width="200" height="200" src="{{ MEDIA_URL}}noimg.jpg" alt="{{user.username}}'s profile picture"/>
-			{% endif %}
+			<img src="{{ MEDIA_URL }}{{userprofile.picture }} "width="300" height="300" alt="{{user.username}}'s picture" />
+        <br/>
+
 		</div>
 		<div class="row user-account-info pb-3 border-bottom">
         <div class="col-7">
