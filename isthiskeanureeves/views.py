@@ -7,6 +7,8 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from isthiskeanureeves.forms import UserForm, UserProfileForm, CategoryForm, PageForm
 from isthiskeanureeves.models import Category, Page, UserProfile
+from isthiskeanureeves.get import getUserDetails
+
 
 def loadContent():
     topKeanu = []
@@ -88,8 +90,12 @@ def upload(request):
 @login_required
 
 def user_profile(request):
-    context_dict = {}
+    context_dict = {'userProfile' : {}}
 
+    getUser = UserProfile.objects.get(user = request.user)
+
+    # Get all the details of the current logged in user
+    context_dict['userProfile'].update(getUserDetails(getUser))
 
     return render(request, 'isthiskeanureeves/userprofile.html', context_dict)
 

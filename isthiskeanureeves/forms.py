@@ -45,7 +45,7 @@ class UserForm(forms.ModelForm):
 
 class UserProfileForm(forms.ModelForm):
     
-    email = forms.URLField(required=False)
+    #email = forms.URLField(required=False)
     picture = forms.ImageField(required=False)
     
     class Meta:

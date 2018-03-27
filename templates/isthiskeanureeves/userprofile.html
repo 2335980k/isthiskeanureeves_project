@@ -1,29 +1,43 @@
 {% extends 'isthiskeanureeves/base_boot-strap.html' %}
 {% load staticfiles %}
 
-{% block title_block %}
-	User - {{user.username}}
-{% endblock %}
+
+{% block title_block %}My Profile{% endblock %}
 
 {% block body_block %}
-{% if user.is_authenticated %}
-<div id="mainBody">
-	<div id="user_info">
-		<div id="photoFrame">
-			<!-- check user is currently the one logged in -->
-			<img src="{{ MEDIA_URL }}{{userprofile.picture.url }} "width="300" height="300" alt="{{user.username}}'s picture" />
-        <br/>
+    {% if userProfile.values %}
+        {% for details in userProfile.values %}
+        <div class="container">
+            <div class="header text-center px-3 py-3 pt-md-5 pb-md-4 mx-auto">
+                <h3 class="display-4">Your Profile</h3>
+            </div>
+            <div class="row">
+                <div class="col-6 mx-auto">
+                    <div class="card box-shadow">
+                        {% if details.picture %}
+                            <img class="card-img-top img-fluid" src="{{MEDIA_URL}}{{ details.picture }}" alt=" profile picture">
+                        {% else %}
+                           <!-- If the picture is not present, load a placeholder -->
+                            <img class="card-img-top img-fluid" src="{{MEDIA_URL}}noimage.png" alt="Placeholder: profile picture missing">
+                        {% endif %}
+                        
+						<div class="row user-account-info pb-3 border-bottom">
+                        <div class="col-7">
+                        <h2>Username: {{user.username }}</h2>
 
-		</div>
-		<div class="row user-account-info pb-3 border-bottom">
-        <div class="col-7">
-            <h2>Username: {{user.username }}</h2>
+                        {% if user.email %}
+                            <strong><em>Email address: {{ user.email }}</em></strong><br />
+                        {% else %}
+                            <strong><em>Email address: No e-mail provided</em></strong><br />
+                        {% endif %}
 
-            {% if user.email %}
-                <strong><em>Email address: {{ user.email }}</em></strong><br />
-            {% else %}
-                <strong><em>Email address: No e-mail provided</em></strong><br />
-            {% endif %}
-
-{% endif %}
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        No information found.
+    {% endif %}
 {% endblock %}
