@@ -44,8 +44,9 @@
 
     <div class="container">
       <!-- Example row of columns -->
-      <div class="row">
-        <div class="col-md-4">
+        <div>
+		{% if items %}
+		<div class="col-md-4">
           <h2>Heading</h2>
           		<img class="img-fluid" src="https://images-na.ssl-images-amazon.com/images/M/MV5BMjIxMjE0MDY0Ml5BMl5BanBnXkFtZTgwNTI0OTcyMDI@._CR2554,398,788,788_UX402_UY402._SY201_SX201_AL_.jpg?resize=900:*" alt="Picture of a keanu" />
 
@@ -61,8 +62,10 @@
            <img class="img-fluid" src="https://o.aolcdn.com/images/dims3/GLOB/legacy_thumbnail/630x315/format/jpg/quality/85/http%3A%2F%2Fi.huffpost.com%2Fgen%2F1572592%2Fimages%2Fn-KEANU-REEVES-628x314.jpg" alt="Picture of a keanu" />
           <p><a class="btn btn-secondary" href="#" role="button">Page &raquo;</a></p>
         </div>
-      </div>
-	  
+	    {% else %}
+		<strong>There are no pictures present.</strong>
+	    {% endif %}
+	  </div>
 	   <div class="row">
 	        <div class="col-md-4">
 				<h2>Heading</h2>
