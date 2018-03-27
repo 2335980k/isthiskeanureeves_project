@@ -32,42 +32,72 @@ def loadContent():
             keaNew.append(str(i.image))
             keaNew.append(rating)
             keaNew.append(i.date_added)
-            
+
     pageList = [topKeanu,notKeanu,keaNew]    
     return pageList
 
+
+
 # Call index
 def index(request):
-    #page_list = Page.objects.order_by('title','image')[:12]
     page_load_num = 0
-    
-    #for i in Page.objects.all():
-    #    Pages.append(i.title)
-    #    Pages.append(str(i.image))
-    #    Pages.append(i.category.name)
-    #    Pages.append(i.rating)
-    #    #Pages.append(i.date_added)
-    #    print(i.title,i.image,i.category, i.date_added,i.rating)
-    #    print(i.title)
-    #print(Pages)
     context_dict = {}
-    
-    top_keanu_list = loadContent()[page_load_num]
-    for i in range(len(top_keanu_list)):
+    out_list = []
+    wrapper_list = []
+    lister = loadContent()[page_load_num]
+    for i in range(len(lister)):
         if i%4 == 0:
-            context_dict[top_keanu_list[i]] =  top_keanu_list[i+1],top_keanu_list[i+2]
-    
-    print(context_dict)
-    
-    #category_list = Category.objects.order_by('-name')[:5]
-    #context_dict = {'categories': category_list}
+            out_list.append(lister[i])
+            out_list.append(lister[i + 1])
+            out_list.append(lister[i + 2])
+            out_list.append(lister[i + 3])
+            if i%12 ==0:
+                if i > 4 and i%12 == 0:
+                    out_list.append("row")
+                    out_list.append("close")
+                else:   
+                    out_list.append("row")
+                flag = True
+                    
+            wrapper_list.append(out_list)
+            print(out_list)
+            out_list = []
+    #print(wrapper_list)
+   
+    context_dict = {'items': wrapper_list }
 
     # Render the response and send it back!
     return render(request, 'isthiskeanureeves/index.html',context_dict)
-# Call keanuew page	
+
+
+# Call keanew page	
 def keanew(request):
     page_load_num = 2
     context_dict = {}
+
+    out_list = []
+    wrapper_list = []
+    lister = loadContent()[page_load_num]
+    for i in range(len(lister)):
+        if i%4 == 0:
+            out_list.append(lister[i])
+            out_list.append(lister[i + 1])
+            out_list.append(lister[i + 2])
+            out_list.append(lister[i + 3])
+            if i%12 ==0:
+                if i > 4 and i%12 == 0:
+                    out_list.append("row")
+                    out_list.append("close")
+                else:   
+                    out_list.append("row")
+                flag = True
+                    
+            wrapper_list.append(out_list)
+            print(out_list)
+            out_list = []
+    #print(wrapper_list)
+   
+    context_dict = {'items': wrapper_list }
     return render(request, 'isthiskeanureeves/keanew.html',context_dict)
 # Call about page
 def about(request):
@@ -78,6 +108,30 @@ def about(request):
 def keanothim(request):
     page_load_num = 1
     context_dict = {}
+    
+    out_list = []
+    wrapper_list = []
+    lister = loadContent()[page_load_num]
+    for i in range(len(lister)):
+        if i%4 == 0:
+            out_list.append(lister[i])
+            out_list.append(lister[i + 1])
+            out_list.append(lister[i + 2])
+            out_list.append(lister[i + 3])
+            if i%12 ==0:
+                if i > 4 and i%12 == 0:
+                    out_list.append("row")
+                    out_list.append("close")
+                else:   
+                    out_list.append("row")
+                flag = True
+                    
+            wrapper_list.append(out_list)
+            print(out_list)
+            out_list = []
+    #print(wrapper_list)
+   
+    context_dict = {'items': wrapper_list }
     return render(request, 'isthiskeanureeves/notkeanu.html',context_dict)
 # Call login page
 def login(request):

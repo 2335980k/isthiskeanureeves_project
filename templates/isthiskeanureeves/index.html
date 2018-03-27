@@ -6,25 +6,10 @@
 		<title>
 		Is This Keanu Reeves?
 		</title>
-		<!-- 
-		<link rel="stylesheet" type="text/css" href= "{% static "css/style.css" %}"> CSS -->
 		{% block title %} - Top Keanu {% endblock %}
-		
-		
-	<!-- Bootstrap core CSS -->
-    <!--<link href="http://v4-alpha.getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">-->
-
-    <!-- Custom styles for this template -->
-     <!--<link href="http://v4-alpha.getbootstrap.com/examples/jumbotron/jumbotron.css" rel="stylesheet">-->
-
-
 	</head>
 	{% block body_block %}
 	<div id="all">
-	<!-- <img src="{% static "images/isthiskeanureeves.jpg" %}"alt="is this keanu reeves (text)" /> 
-	<h1> Is This Keanu Reeves? </h1> -->
-
-
 		<div class="container">
 		<div class="row">
 			<h1 class="display-3">Is This Keanu Reeves?</h1>
@@ -37,55 +22,40 @@
         {% else %}
                 <p class="text-primary" class="display-3"> Sign in to share your Keanu Reeves...</p>
         {% endif %}
-		
 		<br />
       </div>
-    
 
-    <div class="container">
-      <!-- Example row of columns -->
-        <div>
+	  
+	  
+	  
+	  
+	  
+    <!--<div class="container">-->
+	<div class="container">
 		{% if items %}
+		{% for item in items %}
+		{% if item.5 %}
+		</div>
+		{% endif %}
+		{% if item.4 %}
+		<div class= "{{ item.4|default:"" }}">
+		{% endif %}
 		<div class="col-md-4">
-          <h2>Heading</h2>
-          		<img class="img-fluid" src="https://images-na.ssl-images-amazon.com/images/M/MV5BMjIxMjE0MDY0Ml5BMl5BanBnXkFtZTgwNTI0OTcyMDI@._CR2554,398,788,788_UX402_UY402._SY201_SX201_AL_.jpg?resize=900:*" alt="Picture of a keanu" />
-
-          <p><a class="btn btn-secondary" href="#" role="button">Page &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-          <h2>Heading</h2>
-         <img class="img-fluid" src="https://hips.hearstapps.com/esquireuk.cdnds.net/17/06/4000x2250/hd-aspect-1486662851-shot-01-0041-fin6-flat.jpg?resize=330:*" alt="Picture of a keanu" />
-          <p><a class="btn btn-secondary" href="#" role="button">Page &raquo;</a></p>
-       </div>
-        <div class="col-md-4">
-          <h2>Heading</h2>
-           <img class="img-fluid" src="https://o.aolcdn.com/images/dims3/GLOB/legacy_thumbnail/630x315/format/jpg/quality/85/http%3A%2F%2Fi.huffpost.com%2Fgen%2F1572592%2Fimages%2Fn-KEANU-REEVES-628x314.jpg" alt="Picture of a keanu" />
-          <p><a class="btn btn-secondary" href="#" role="button">Page &raquo;</a></p>
-        </div>
+				<h2>{{ item.0 }}</h2>
+					<a href="{% url 'keanew' %}" >
+					<img class="img-fluid" src="{{ MEDIA_URL}}{{ item.1 }}" alt="Picture of a keanu" />
+					<p><a class="btn btn-secondary" href="#" role="button">Page &raquo;</a><p>Rating = {{ item.2 }}</p></p>
+					
+			</div>
+		
+		{% endfor %}
+		</div>
 	    {% else %}
 		<strong>There are no pictures present.</strong>
 	    {% endif %}
+		<h4> You take the red pill—you stay in Wonderland, and I show you how deep the rabbit hole goes.</h4>
 	  </div>
-	   <div class="row">
-	        <div class="col-md-4">
-				<h2>Heading</h2>
-					<a href="{% url 'keanew' %}" >{{ page.title }}
-					<img class="img-fluid" src="{{ MEDIA_URL}}realkeanu2.jpeg" alt="Picture of a keanu" />
-					<p><a class="btn btn-secondary" href="#" role="button">Page &raquo;</a></p>
-			</div>
-		    <div class="col-md-4">
-				<h2>Heading</h2>
-					<img class="img-fluid" src="{{ MEDIA_URL}}bluekeanu.jpg" alt="Picture of a young keanu"/> </a>
-					<p><a class="btn btn-secondary" href="#" role="button">Page &raquo;</a></p>
-			</div>
-		    <div class="col-md-4">
-				<h2>Heading</h2>
-					<img class="img-fluid" src="https://images-na.ssl-images-amazon.com/images/M/MV5BMjIxMjE0MDY0Ml5BMl5BanBnXkFtZTgwNTI0OTcyMDI@._CR2554,398,788,788_UX402_UY402._SY201_SX201_AL_.jpg" alt="Picture of a keanu" />
-					<p><a class="btn btn-secondary" href="#" role="button">Page &raquo;</a></p> 
-		</div>
-			</div>
-	   </div>
-	   <h4> You take the red pill—you stay in Wonderland, and I show you how deep the rabbit hole goes.</h4>
+	   
 
       <hr>
 
