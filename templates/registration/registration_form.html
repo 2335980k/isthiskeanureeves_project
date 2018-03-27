@@ -20,10 +20,11 @@
                   enctype="multipart/form-data">
 
           {% csrf_token %}
-         
+          
+
 
           <!-- Display each form -->
-          {{ user_form.as_p }}
+          <{{ user_form.as_p }}
           {{ profile_form.as_p }}
 
           <!-- Provide  click to submit the form. -->
