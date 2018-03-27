@@ -25,7 +25,7 @@ from django.core.urlresolvers import reverse
 #if successful at logging
 class MyRegistrationView(RegistrationView):
     def get_success_url(self, user):
-                return reverse('register_profile')
+                return reverse('isthiskeanureeves')
 
 urlpatterns = [
         url(r'^admin/', admin.site.urls),

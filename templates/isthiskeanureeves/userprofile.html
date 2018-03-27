@@ -9,7 +9,7 @@
         {% for details in userProfile.values %}
         <div class="container">
             <div class="header text-center px-3 py-3 pt-md-5 pb-md-4 mx-auto">
-                <h3 class="display-4">Your Profile</h3>
+                <h3 class="display-4">My account</h3>
             </div>
             <div class="row">
                 <div class="col-6 mx-auto">
@@ -18,7 +18,7 @@
                             <img class="card-img-top img-fluid" src="{{MEDIA_URL}}{{ details.picture }}" alt=" profile picture">
                         {% else %}
                            <!-- If the picture is not present, load a placeholder -->
-                            <img class="card-img-top img-fluid" src="{{MEDIA_URL}}noimage.png" alt="Placeholder: profile picture missing">
+                            <img class="card-img-top img-fluid" src="{{MEDIA_URL}}noimage.png" alt="No profile image">
                         {% endif %}
                         
 						<div class="row user-account-info pb-3 border-bottom">
@@ -30,7 +30,11 @@
                         {% else %}
                             <strong><em>Email address: No e-mail provided</em></strong><br />
                         {% endif %}
-
+                        <div class=" footer text-left">
+                            <a class="btn btn-light btn-sm text-secondary" href="{% url 'edit_userprofile' %}" role="button">Edit</a>
+                           
+                          
+                        </div>
                        
                     </div>
                 </div>
@@ -38,6 +42,6 @@
         </div>
         {% endfor %}
     {% else %}
-        No information found.
+        Invaild.
     {% endif %}
 {% endblock %}

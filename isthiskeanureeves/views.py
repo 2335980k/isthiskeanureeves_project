@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
-from isthiskeanureeves.forms import UserForm, UserProfileForm, CategoryForm, PageForm
+from isthiskeanureeves.forms import UserForm, UserProfileForm, CategoryForm, PageForm, EditProfileForm 
 from isthiskeanureeves.models import Category, Page, UserProfile
 from isthiskeanureeves.get import getUserDetails
 
@@ -88,7 +88,6 @@ def upload(request):
     return HttpResponse("This is the upload page")
 # Call userprofile
 @login_required
-
 def user_profile(request):
     context_dict = {'userProfile' : {}}
 
@@ -98,6 +97,29 @@ def user_profile(request):
     context_dict['userProfile'].update(getUserDetails(getUser))
 
     return render(request, 'isthiskeanureeves/userprofile.html', context_dict)
+
+
+#Call edit_userfile
+@login_required
+def edit_userprofile(request):
+    loginUser = UserProfile.objects.get(user=request.user)
+
+    form = EditProfileForm(request.POST or None)
+    if request.method == 'POST':
+        if form.is_valid():
+            
+            if 'picture' in request.FILES:
+                logginUser.picture.delete(save=False)
+                logginUser.picture = request.FILES['picture']
+            loginUser.save()
+            return HttpResponseRedirect(reverse('userprofile'))
+
+    context = {'form': form, 'userProfile': {}}
+    # Gets all the details of the current logged in user
+    context['userProfile'].update(getUserDetails(loginUser))
+
+    return render(request, 'isthiskeanureeves/edit_userprofile.html', context)
+
 
 #register
 def register(request):

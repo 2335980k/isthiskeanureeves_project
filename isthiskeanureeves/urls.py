@@ -14,7 +14,8 @@ urlpatterns = [
     url(r'^restricted/', views.restricted, name='restricted'),
     url(r'upload/$', views.upload, name='upload'),
     url(r'^logout/$', views.user_logout, name='logout'),
-    url(r'^userprofile/$', views.user_profile, name='userprofile'),
+    url(r'^userprofile/$', views.user_profile, name='userprofile'),
+    url(r'^edit_userprofile$', views.edit_userprofile, name = 'edit_userprofile'),    
     url(r'^register_profile/$', views.register_profile, name='register_profile'),
 
     
