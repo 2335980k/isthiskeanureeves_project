@@ -32,8 +32,18 @@
             <span class="error">{{ message }}</span>
         </div>
     {% endif %}
+	{% if not registered %}
+	<p>
+     Not a member?
+     <a href="{% url 'register' %}">Register</a>
+     </p>
+	{% else %}
+    {% endif %}
     </div>
+	
+
     <div class="col">
     </div>
+	
 </div>
 {% endblock %}

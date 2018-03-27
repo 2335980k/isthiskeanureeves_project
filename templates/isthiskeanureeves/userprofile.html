@@ -1,40 +1,31 @@
 {% extends 'isthiskeanureeves/base_boot-strap.html' %}
 {% load staticfiles %}
 
-<!--
-     Template to edit account.
-     Used by two views, for changing Name, etc. and for changing the password.
-     The views simply pass in different forms to display.
--->
 {% block title_block %}
-    userprofile
+	User - {{user.username}}
 {% endblock %}
 
-{% block head_block %}
-{% endblock %}
 {% block body_block %}
-    <h1>Account details</h1>
+{% if user.is_authenticated %}
+<div id="mainBody">
+	<div id="user_info">
+		<div id="photoFrame">
+			<!-- check user is currently the one logged in -->
+			{% if user.picture.picture %}
+			<img width="200" height="200" src="{{ MEDIA_URL }}{{picture.picture}}" alt="{{user.username}}'s profile picture"/>
+			{% else %}
+			<img width="200" height="200" src="{{ MEDIA_URL}}noimg.jpg" alt="{{user.username}}'s profile picture"/>
+			{% endif %}
+		</div>
+		<div class="row user-account-info pb-3 border-bottom">
+        <div class="col-7">
+            <h2>Username: {{user.username }}</h2>
 
-	<div>
-        <br/>
-        Username = {{ user.username }}
-        <br/>
-        Email address = {{ user.email }}
-        <br />
-		Picture =  <img src="{{ MEDIA_URL}}bluekeanu.jpg" {{user.picture}}/></a>
-		
+            {% if user.email %}
+                <strong><em>Email address: {{ user.email }}</em></strong><br />
+            {% else %}
+                <strong><em>Email address: No e-mail provided</em></strong><br />
+            {% endif %}
 
-
-            
-                
-    </div>
-	
-	 <footer class="footer fixed-bottom bg-dark">
-            <div class="container text-center">
-                <p class="footer-p-custom">
-                    HYUNJUN KIM&nbsp;&nbsp;|&nbsp;&nbsp;PAUL LANGDALE&nbsp;&nbsp;|&nbsp;&nbsp;LIAM BRODIE<br/>
-    				isthiskeanureeves &copy; 2018
-                </p>
-            </div>
-        </footer>
+{% endif %}
 {% endblock %}
