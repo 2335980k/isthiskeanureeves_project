@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from isthiskeanureeves.forms import UserForm, UserProfileForm, CategoryForm, PageForm, EditProfileForm 
 from isthiskeanureeves.models import Category, Page, UserProfile
 from isthiskeanureeves.get import getUserDetails
-
+from django.contrib.auth.models import User
 
 def loadContent():
     topKeanu = []
@@ -156,25 +156,51 @@ def user_profile(request):
 #Call edit_userfile
 @login_required
 def edit_userprofile(request):
-    loginUser = UserProfile.objects.get(user=request.user)
+    # Check if the user exists before edithing their profile
+    try:
+        user = User.objects.get(username=request.user.username)
+    except (User.DoesNotExist) as error:
+        print(error)
+        return redirect('index')
 
-    form = EditProfileForm(request.POST or None)
-    if request.method == 'POST':
-        if form.is_valid():
+    userprofile = UserProfile.objects.get_or_create(user=request.user)[0]
+    user_form = UserForm(request.POST or None, instance=user)
+    profile_form = UserProfileForm(request.POST or None, instance=userprofile)
+
+ 
+    if user_form.is_valid() and profile_form.is_valid():
+       
+        user = user_form.save(commit=False)
+
+       
+        user.set_password(user.password)
+        user.save()
+
+       
+        userprofile = profile_form.save(commit=False)
+        userprofile.user = user
+
+     
+        if 'picture' in request.FILES:
+            userprofile.picture = request.FILES['picture']
+
+       
+        userprofile.save()
+
+        
+        auth_login(request, user)
             
-            if 'picture' in request.FILES:
-                logginUser.picture.delete(save=False)
-                logginUser.picture = request.FILES['picture']
-            loginUser.save()
-            return HttpResponseRedirect(reverse('userprofile'))
-
-    context = {'form': form, 'userProfile': {}}
-    # Gets all the details of the current logged in user
-    context['userProfile'].update(getUserDetails(loginUser))
-
-    return render(request, 'isthiskeanureeves/edit_userprofile.html', context)
+        return render(request, 'isthiskeanureeves/index.html')
+    else:
+       
+        print(user_form.errors, profile_form.errors)
+        
 
 
+    return render(request,
+                  'isthiskeanureeves/edit_userprofile.html',
+                  {'user_form': user_form,
+                   'profile_form': profile_form})
 #register
 def register(request):
 

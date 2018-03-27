@@ -1,27 +1,47 @@
-{% extends "isthiskeanureeves/base_boot-strap.html" %}
+<!DOCTYPE html>
+
+{% extends 'isthiskeanureeves/base_boot-strap.html' %}
+{% load staticfiles %}
+
+{% block css_block %}
+	<!-- Bootstrap style edits -->
+    <link href="{% static 'css/editprofile.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title_block %}
+	Edit your Details
+{% endblock %}
+
 
 {% block body_block %}
-	<h1> Edit Profile </h1>
+	<h1 class="display-3" style="padding-top:10px;">Edit your Details</h1>
+	<form id="user_form" method="post" action="{% url 'edit_userprofile' %}" enctype="multipart/form-data">
 
-{% if userProfile.values %}
-    {% for details in userProfile.values %}
-	<div>
-        {% if user.username == user.username %}
-        <form method="post" action="." enctype="multipart/form-data">
-             {% csrf_token %}
-             {{ form.as_p }}
-             <input type="submit" value="Update" />
-        </form>
-        {% else %}
-        <p><strong>Invaild connected</strong> 
-              {{}</a></p>
-        {% endif %}
-    </div>
-    <div id="edit_profile"></div>
+		{% csrf_token %}
+		
+		<!-- Display each form -->
+		{% for field in user_form %}
+		<div class="fieldWrapper">
+			{{ field.errors }}
+			{{ field.label_tag }} {{ field }}
+			{% if field.help_text %}
+			<p class="help">{{ field.help_text|safe }}</p>
+			{% endif %}
+		</div>
+		{% endfor %}
+		
+		{% for field in profile_form %}
+		<div class="fieldWrapper">
+			{{ field.errors }}
+			{{ field.label_tag }} {{ field }}
+			{% if field.help_text %}
+			<p class="help">{{ field.help_text|safe }}</p>
+			{% endif %}
+		</div>
+		{% endfor %}
 
-   
-    {% endfor %}
-{% else %}
-   Invaild.
-{% endif %}
+
+		<!-- Provide a button to click to submit the form. -->
+		<input type="submit" name="submit" value="Save" id="id_button" />
+	</form>
 {% endblock %}
