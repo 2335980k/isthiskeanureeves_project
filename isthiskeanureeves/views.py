@@ -8,17 +8,63 @@ from django.contrib.auth.decorators import login_required
 from isthiskeanureeves.forms import UserForm, UserProfileForm, CategoryForm, PageForm
 from isthiskeanureeves.models import Category, Page, UserProfile
 
+def loadContent():
+    topKeanu = []
+    keaNew = []
+    notKeanu = []
+    
+    for i in Page.objects.all():
+        rating = int(i.rating)
+        if rating >= 10:
+            topKeanu.append(i.title)
+            topKeanu.append(str(i.image))
+            topKeanu.append(rating)
+            topKeanu.append(i.date_added)
+        elif rating < 0:
+            notKeanu.append(i.title)
+            notKeanu.append(str(i.image))
+            notKeanu.append(rating)
+            notKeanu.append(i.date_added)
+        else:
+            keaNew.append(i.title)
+            keaNew.append(str(i.image))
+            keaNew.append(rating)
+            keaNew.append(i.date_added)
+            
+    pageList = [topKeanu,notKeanu,keaNew]    
+    return pageList
 
 # Call index
 def index(request):
+    #page_list = Page.objects.order_by('title','image')[:12]
+    page_load_num = 0
     
-    category_list = Category.objects.order_by('-name')[:5]
-    context_dict = {'categories': category_list}
+    #for i in Page.objects.all():
+    #    Pages.append(i.title)
+    #    Pages.append(str(i.image))
+    #    Pages.append(i.category.name)
+    #    Pages.append(i.rating)
+    #    #Pages.append(i.date_added)
+    #    print(i.title,i.image,i.category, i.date_added,i.rating)
+    #    print(i.title)
+    #print(Pages)
+    context_dict = {}
+    
+    top_keanu_list = loadContent()[page_load_num]
+    for i in range(len(top_keanu_list)):
+        if i%4 == 0:
+            context_dict[top_keanu_list[i]] =  top_keanu_list[i+1],top_keanu_list[i+2]
+    
+    print(context_dict)
+    
+    #category_list = Category.objects.order_by('-name')[:5]
+    #context_dict = {'categories': category_list}
 
     # Render the response and send it back!
     return render(request, 'isthiskeanureeves/index.html',context_dict)
 # Call keanuew page	
 def keanew(request):
+    page_load_num = 2
     context_dict = {}
     return render(request, 'isthiskeanureeves/keanew.html',context_dict)
 # Call about page
@@ -28,6 +74,7 @@ def about(request):
     
 # Call Kea-not-him page
 def keanothim(request):
+    page_load_num = 1
     context_dict = {}
     return render(request, 'isthiskeanureeves/notkeanu.html',context_dict)
 # Call login page
@@ -38,7 +85,8 @@ def login(request):
 def upload(request):
     return HttpResponse("This is the upload page")
 # Call userprofile
-@login_required
+@login_required
+
 def user_profile(request):
     context_dict = {}
 
@@ -212,4 +260,5 @@ def register_profile(request):
                  print(form.errors)
      context_dict = {'form':form}
      
-     return render(request, 'isthiskeanureeves/profile_registration.html', context_dict)
+     return render(request, 'isthiskeanureeves/profile_registration.html', context_dict)
+
