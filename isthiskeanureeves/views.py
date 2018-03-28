@@ -9,6 +9,8 @@ from isthiskeanureeves.forms import UserForm, UserProfileForm, CategoryForm, Pag
 from isthiskeanureeves.models import Category, Page, UserProfile
 from isthiskeanureeves.get import getUserDetails
 from django.contrib.auth.models import User
+from isthiskeanureeves.forms import UploadForm
+from isthiskeanureeves.models import Upload
 
 def loadContent():
     topKeanu = []
@@ -139,7 +141,8 @@ def login(request):
     return render(request, 'isthiskeanureeves/login.html',context_dict)
 # Call upload page
 def upload(request):
-    return HttpResponse("This is the upload page")
+    context_dict = {}
+    return render(request, 'isthiskeanureeves/upload.html',context_dict)
 # Call userprofile
 @login_required
 def user_profile(request):
@@ -370,3 +373,30 @@ def register_profile(request):
      
      return render(request, 'isthiskeanureeves/profile_registration.html', context_dict)
 
+## User upload the picture
+
+def user_upload(request):
+    if request.method == 'POST':
+
+        upload_form = UploadForm(request.POST, request.FILES)
+
+        if upload_form.is_valid():
+
+            upload = upload_form.save(commit=False)
+            upload.user = request.user
+            upload.ratings_id = 0
+          
+
+            if 'picture' in request.FILES:
+                upload.picture = request.FILES['picture']
+            upload.save()
+
+            return render(request, 'isthiskeanureeves/upload_finish.html', {'upload_form': upload_form})
+        else:
+            print(upload_form.errors)
+    else:
+        upload_form = UploadForm()
+        uploads = Upload.objects.order_by('-date_added')
+
+    return render(request, 'isthiskeanureeves/upload.html',
+                  {'uploads': uploads, 'upload_form': upload_form})

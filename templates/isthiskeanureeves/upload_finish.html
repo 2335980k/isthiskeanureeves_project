@@ -1,0 +1,13 @@
+{% extends 'isthiskeanureeves/base_boot-strap.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+	Upload
+{% endblock %}
+{% block body_block %}
+	<div class="form-body">
+		<h1>Upload Complete!</h1>
+		<p>Redirecting to uploads...</p>
+	</div>	
+	<meta http-equiv="refresh" content="3;{% url 'index' %}"/>
+{% endblock %}

@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 	'isthiskeanureeves',
-    'registration' 
+    'registration',
+    'star_ratings'
     
 ]
 
@@ -145,4 +146,10 @@ REGISTRATION_AUTO_LOGIN = True
 LOGIN_REDIRECT_URL = '/rango/'
 # The page users are directed to if they are not logged in,
 # and are trying to access pages requiring authentication
-LOGIN_URL = '/accounts/login/'
+LOGIN_URL = '/accounts/login/'
+
+
+# Rating settings
+STAR_RATINGS_RERATE = False
+STAR_RATINGS_RANGE = 5
+#STAR_RATINGS_HEIGHT and STAR_RATINGS_WIDTH

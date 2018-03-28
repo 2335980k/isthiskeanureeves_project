@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from isthiskeanureeves.models import Category, UserProfile, Page
+from isthiskeanureeves.models import Category, UserProfile, Page, Upload
 
 # Category form
 class CategoryForm(forms.ModelForm):
@@ -62,8 +62,8 @@ class EditProfileForm(forms.ModelForm):
         exclude = ('username','password','email')
 
    
-
-#class UploadForm(forms.ModelForm):
-   # class Meta:
-    #    model = Upload
-     #   fields = ('name', 'picture', 'category')
+# User upload form
+class UploadForm(forms.ModelForm):
+    class Meta:
+        model = Upload
+        fields = ('name', 'picture', 'category')

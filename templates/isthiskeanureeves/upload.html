@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+{% extends 'isthiskeanureeves/base_boot-strap.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+	Upload
+{% endblock %}
+{% block body_block %}
+	<!--Checks if a user is logged in, if not they will be asked before viewing this page-->
+	{% if user.is_authenticated %}
+	<!--Here's the form for uploading a new picture-->
+	<div class="header text-center px-3 py-3 pt-md-5 pb-md-4 mx-auto">
+        <h3 class="display-4">Share your keanureeves!</h3>
+	       <div class="form-body">
+		      <form id="upload_rm" method="post" action="{% url 'upload' %}"
+			      enctype="multipart/form-data">
+		            {% csrf_token %}
+		            {{ upload_form.as_p }}
+
+		<input id = "tick" type="image" name="submit" value="Upload" src = "{{ MEDIA_URL }}uploadbtn.jpg"/>
+	        </div>
+	
+	{% else %}
+		<p>You are not logged in.
+		<br>Please Sign in or Sign up before uploading.
+		</p>
+	{% endif %}
+	</div>
+{% endblock %}

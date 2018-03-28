@@ -34,7 +34,8 @@ urlpatterns = [
         url(r'^accounts/', include('registration.backends.simple.urls')),
         url(r'^accounts/register/$',
             MyRegistrationView.as_view(),
-             name='registration_register')
+             name='registration_register'),
+         url(r'^ratings/', include('star_ratings.urls', namespace='ratings', app_name='ratings')),
 	# above maps any URLs starting
     # with isthiskeanureeves/ to be handled by
 	#the isthiskeanu reeves application
