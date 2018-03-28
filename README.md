@@ -8,6 +8,7 @@ Developed by: Hyunjun Kim 2335980k@student.gla.ac.uk
 
 Python anywhere link hosted: http://2335980k.pythonanywhere.com/
 
+
 INFORMATION
 
 * Install requirements from the given file with
@@ -16,3 +17,8 @@ $ pip install -r requirements.txt
 
 
 
+EXTERNAL SOURCES
+ bootstrapper version 4
+ for css and ajax scripts in responsive page design
+ 
+ 
