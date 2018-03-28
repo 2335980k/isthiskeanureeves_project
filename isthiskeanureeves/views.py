@@ -142,9 +142,9 @@ def login(request):
     context_dict = {}
     return render(request, 'isthiskeanureeves/login.html',context_dict)
 # Call upload page
-def upload(request):
-    context_dict = {}
-    return render(request, 'isthiskeanureeves/upload.html',context_dict)
+#def upload(request):
+ #   context_dict = {}
+  #  return render(request, 'isthiskeanureeves/upload.html',context_dict)
 # Call userprofile
 @login_required
 def user_profile(request):
@@ -318,20 +318,14 @@ def add_category(request):
     if request.method == 'POST':
         form = CategoryForm(request.POST)
         if form.is_valid():
-            # Save the new category to the database.
+           
             form.save(commit=True)
-            # Now that the category is saved
-            # We could give a confirmation message
-            # But since the most recent category added is on the index page
-            # Then we can direct the user back to the index page.
+            
             return index(request)
         else:
-            # The supplied form contained errors -
-            # just print them to the terminal.
 
             print(form.errors)
-    # Will handle the bad form, new form, or no form supplied cases.
-    # Render the form with error messages (if any).
+    
         
     return render(request, 'isthiskeanureeves/add_category.html', {'form': form})
 
@@ -387,6 +381,9 @@ def user_upload(request):
             upload = upload_form.save(commit=False)
             upload.user = request.user
             upload.ratings_id = 0
+           # Page.objects.get_or_create(user =  upload.user, rating = upload.ratings_id, )
+
+            
           
 
             if 'picture' in request.FILES:

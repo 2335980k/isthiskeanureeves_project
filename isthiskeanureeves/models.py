@@ -36,7 +36,7 @@ class Page(models.Model):
       date_added = models.DateTimeField(auto_now_add=True)
       rating = models.IntegerField(default = 0)
 
-       def save(self, *args, **kwargs):
+      def save(self, *args, **kwargs):
            self.slug = slugify(self.title)
            super(Page, self).save(*args, **kwargs)
 	  

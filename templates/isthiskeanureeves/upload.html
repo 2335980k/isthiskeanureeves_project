@@ -16,7 +16,7 @@
               <strong>Upload file:</strong> 
 			  {% csrf_token %}
 			  {{ upload_form.as_p }}
-              <input type="file" name="file" />
+              <!--<input type="file" name="file" -->
                         <input type="submit" style="float:right;" value="Upload" />
               </form>
 	        </div>
@@ -27,25 +27,7 @@
 		</p>
 	{% endif %}
 	</div>
-    {% if uploads %}
-	<div class = "categorySection">
-	<h1> Previous Uploads </h1>
-</div>
-			<div class = "cardunit">
-			{% for upload in uploads %}
-			<div class = "smallcard" id = "myBtn">
-				<div class = "smallpet">
-					<img src="{{ MEDIA_URL }}{{ upload.picture }}"
-					alt="Picture of {{ upload.name }}">
-				</div>
-				<h1>{{ upload.name }}</h1>
-				<br>
-				<h4>{{ upload.category }}</h4>
-		</div>
-					{% endfor %}
-		</div>
-	{% else %}
-		<p>No Uploads</p>
-	{% endif %}
-
-{% endblock %}
+	
+ 
+ {% endblock %}
+	
