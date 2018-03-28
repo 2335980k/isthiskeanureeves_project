@@ -43,9 +43,6 @@
 		<li class="nav-item">
 				<a class="nav-link" href="{% url 'about' %}">About</a>
 		</li>
-		<li class="nav-item">
-            <a class="nav-link disabled" href="#"> disabled </a>
-          </li>
 		
 		{% if user.is_authenticated %}
 		<li class="nav-item">
@@ -63,21 +60,30 @@
 		{% endif %}
         </ul>
 		
-		<!-- This is a search box to possibly implement
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-		-->
       </div>
     </nav>
 
     <!-- Main jumbotron space -->
     <div class="jumbotron">
-	{% block body_block %}{% endblock %}
-      
+	{% block welcome %}
+	{% endblock %}
+	{% if user.is_authenticated %}
+                <p class="text-success" class="display-3"> Welcome {{ user.username }}</p>
+                
+        {% else %}
+                <p class="text-primary" class="display-3"> Sign in to share your Keanu Reeves...</p>
+        {% endif %}
 
-
+	{% block body_block %}
+	
+	{% endblock %}
+	
+	
+<div class="row">
+      <footer>
+        <p>&copy; Paul & Jun 2018</p>
+      </footer>
+ </div>
     <!-- Bootstrap core JavaScript================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

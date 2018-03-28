@@ -7,21 +7,18 @@
 		
 		{% block title %} - Not Keanu {% endblock %}
 		
-		
-		{% block body_block %}
+		{% block welcome %}
 		<div class="container">
 		<div class="row">
 			<h1 class="display-3">Is This Keanu Reeves?</h1>
 			<br />
 			<h1 class="display-6"> - Kea-New!  </h2>
 		 </div>
-		{% if user.is_authenticated %}
-                <p class="text-success" class="display-3"> Welcome {{ user.username }}</p>
-                
-        {% else %}
-                <p class="text-primary" class="display-3"> Sign in to share your Keanu Reeves...</p>
-        {% endif %}
 		</div>
+		{% endblock %}
+		
+		{% block body_block %}
+		
  	<div class="container">
 		{% if items %}
 		{% for item in items %}
@@ -46,10 +43,6 @@
 	    {% endif %}
 		</div>
 
-      <hr>
-
-      <footer>
-        <p>&copy; Paul & Jun 2018</p>
-      </footer>
+      
     </div> 
 {% endblock %}

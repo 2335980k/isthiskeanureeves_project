@@ -7,22 +7,18 @@
 		
 		{% block title %} - Not Keanu {% endblock %}
 		
-		
-{% block body_block %}
-		
+		{% block welcome %}
 		<div class="container">
 		<div class="row">
 			<h1 class="display-3">Is This Keanu Reeves?</h1>
 			<br />
-			<h1 class="display-6"> - Kea-Not-Him  </h2>
+			<h1 class="display-6"> - Kea-New!  </h2>
 		 </div>
-		{% if user.is_authenticated %}
-                <p class="text-success" class="display-3"> Welcome {{ user.username }}</p>
-                
-        {% else %}
-                <p class="text-primary" class="display-3"> Sign in to share your Keanu Reeves...</p>
-        {% endif %}
 		</div>
+		{% endblock %}
+		
+		
+{% block body_block %}
 		
 		
 		
@@ -37,7 +33,7 @@
 		{% endif %}
 		<div class="col-md-4">
 				<h2>{{ item.0 }}</h2>
-					<a href="{% url 'keanew' %}" >
+					<a href="{% url 'keanothim' %}" >
 					<img class="img-fluid" src="{{ MEDIA_URL}}{{ item.1 }}" alt="{{ item.0 }}" />
 					<p><a class="btn btn-secondary" href="#" role="button">Page &raquo;</a><p>Rating = {{ item.2 }}</p></p>
 					
@@ -50,10 +46,6 @@
 	    {% endif %}
 		</div>
 
-      <hr>
 
-      <footer>
-        <p>&copy; Paul & Jun 2018</p>
-      </footer>
     </div> 
 {% endblock %}

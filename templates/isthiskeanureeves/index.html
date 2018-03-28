@@ -8,7 +8,7 @@
 		</title>
 		{% block title %} - Top Keanu {% endblock %}
 	</head>
-	{% block body_block %}
+	{% block welcome %}
 	<div id="all">
 		<div class="container">
 		<div class="row">
@@ -16,14 +16,12 @@
 			<br />
 			<h1 class="display-6"> - Top Keanu Reeves </h2>
 		 </div>
-		{% if user.is_authenticated %}
-                <p class="text-success" class="display-3"> Welcome {{ user.username }}</p>
-                
-        {% else %}
-                <p class="text-primary" class="display-3"> Sign in to share your Keanu Reeves...</p>
-        {% endif %}
-		<br />
+
       </div>
+	  </div>
+	{% endblock %}
+	{% block body_block %}
+	
 
 	  
 	  
@@ -42,7 +40,7 @@
 		{% endif %}
 		<div class="col-md-4">
 				<h2>{{ item.0 }}</h2>
-					<a href="{% url 'keanew' %}" >
+					<a href="{% url 'index' %}" >
 					<img class="img-fluid" src="{{ MEDIA_URL}}{{ item.1 }}" alt="Picture of a keanu" />
 					<p><a class="btn btn-secondary" href="#" role="button">Page &raquo;</a><p>Rating = {{ item.2 }}</p></p>
 					
@@ -53,15 +51,11 @@
 	    {% else %}
 		<strong>There are no pictures present.</strong>
 	    {% endif %}
+		<div class="row">
 		<h4> You take the red pill—you stay in Wonderland, and I show you how deep the rabbit hole goes.</h4>
 	  </div>
-	   
+	    </div>
 
-      <hr>
-
-      <footer>
-        <p>&copy; Paul & Jun 2018</p>
-      </footer>
     </div>
 
 {% endblock %}
