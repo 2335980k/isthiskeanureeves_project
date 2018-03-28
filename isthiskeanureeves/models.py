@@ -35,6 +35,10 @@ class Page(models.Model):
       image = models.ImageField(default = "null",upload_to=user_upload)
       date_added = models.DateTimeField(auto_now_add=True)
       rating = models.IntegerField(default = 0)
+
+       def save(self, *args, **kwargs):
+           self.slug = slugify(self.title)
+           super(Page, self).save(*args, **kwargs)
 	  
       def __str__(self): # For Python 2, use __unicode__ too
            return self.title
