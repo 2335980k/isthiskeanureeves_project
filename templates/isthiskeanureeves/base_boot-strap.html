@@ -55,7 +55,7 @@
 		  <a class="nav-link" href="{% url 'auth_login' %}">Sign in</a>
 		 </li>
 		<li class="nav-item">
-		<a class="nav-link" href="{% url 'registration_register' %}">Sign up</a>
+		<a class="nav-link" href="{% url 'register_profile' %}">Sign up</a>
 		</li>
 		{% endif %}
         </ul>
@@ -67,13 +67,14 @@
     <div class="jumbotron">
 	{% block welcome %}
 	{% endblock %}
+	<div class="row">
 	{% if user.is_authenticated %}
-                <p class="text-success" class="display-3"> Welcome {{ user.username }}</p>
+                <p class="text-success" > Welcome {{ user.username }}</p>
                 
         {% else %}
-                <p class="text-primary" class="display-3"> Sign in to share your Keanu Reeves...</p>
+                <p class="text-primary" > Sign in to share your Keanu Reeves...</p>
         {% endif %}
-
+     </div>
 	{% block body_block %}
 	
 	{% endblock %}
