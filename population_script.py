@@ -67,65 +67,60 @@ def populate():
         u = add_user(user['username'], user['email'], user['password'])
 
     pages = [
-        #{"user": User.id,
-        #"image": "2335980k@student.gla.ac.uk",
-        #"title": "THisisA63good",
-        #"rating" : 40
-        #},
         {"user": "HATEkeanu",
-        "image": " angery@me.com ",
+        "image": "bluekeanu.jpg",
         "title": "KeanuSucksHaHa",
         "rating" : 30
         },
         {"user": "Yoshi",
-        "image": " blep@toungue.com ",
+        "image": "how.jpg",
         "title": "a1234567",
         "rating" : 20
         },
         {"user": "fakekeanu",
-        "image": " jamal@hotmal.com",
+        "image": "isthiskeanu.jpg",
         "title": "a1234567",
         "rating" : 10
         },
         {"user": "2250052",
-        "image": " ",
+        "image": "",
         "title": "isThisKeanuReeves",
         "rating" : 5
         },
         {"user": "hoya",
-        "image": "okkkk@gmail.com ",
+        "image": "notkeanu2.jpg",
         "title": "T3sdif5s",
         "rating" : 1
         },
         {"user": "keanuholic",
-        "image": " ",
+        "image": "notkeanu.jpg",
         "title": "4yyLm40",
         "rating" : 0
         },
         {"user": "testprofile",
-        "image": " daftboi@not.com",
+        "image": "notkeanu3.jpg",
         "title": "This is a Dog",
         "rating" : 0
         },
         {"user": "testprofile",
-        "image": " daftboi@not.com",
+        "image": "notkeanu3.jpg",
         "title": "Haha a cat",
         "rating" : -20
         },
         {"user": "testprofile",
-        "image": " daftboi@not.com",
+        "image": "notkeanu4.jpg",
         "title": "Haha a mouse",
         "rating" : -30
         },
         {"user": "testprofile",
-        "image": " daftboi@not.com",
+        "image": "superkeanu.jpg",
         "title": "Big ups",
         "rating" : -11
         }]
            
-#    for page in pages:
-#        p = add_page(page["user"], "keanew", page["title"],page["image"],page["rating"])
-        #p = add_page(page['user'], "keanew", page['title'],page['image'],page['rating'])
+    for page in pages:
+        p = add_page(page["user"], "keanew", page["title"],page["image"],page["rating"])
+        print("Populating Page: " + page["title"] )
         
 
 
@@ -144,9 +139,14 @@ def add_user(username, email, password):# // populate problem. #################
     return u
 
 def add_page(user, category, title, image, rating):
+    if image == "":
+        image = "noimage.png"
     date = now()
-    p = Page.objects.get_or_create(user = user,category = category, title = title,
-                                   image = image,date_added = date, rating = rating) [0]
+    c = Category.objects.get_or_create(name = category)[0]
+    u = User.objects.get_or_create(username=user)[0]
+    p = Page.objects.get_or_create(user=u, category = c, title = title, image = image, date_added = date, rating = rating)[0]
+    #p = Page.objects.get_or_create(user = user ,category = category, title = title, image = image,date_added = date, rating = rating) [0]
+    #p = Page.objects.get_or_create(category = category, title = title)#, image = image,date_added = date, rating = rating, user = user) [0]
     p.save()
     return p
 # Starts execution here
