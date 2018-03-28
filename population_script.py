@@ -113,7 +113,7 @@ def populate():
         "rating" : -30
         },
         {"user": "testprofile",
-        "image": "superkeanu.jpg",
+        "image": "",
         "title": "Big ups",
         "rating" : -11
         }]

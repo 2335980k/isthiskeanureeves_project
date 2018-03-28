@@ -11,6 +11,7 @@ from isthiskeanureeves.get import getUserDetails
 from django.contrib.auth.models import User
 from isthiskeanureeves.forms import UploadForm
 from isthiskeanureeves.models import Upload
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -64,7 +65,7 @@ def index(request):
                 flag = True
                     
             wrapper_list.append(out_list)
-            print(out_list)
+            #print(out_list)
             out_list = []
     #print(wrapper_list)
    
@@ -352,7 +353,6 @@ def add_page(request, category_name_slug):
        return render(request, 'isthiskeanureeves/add_page.html', context_dict)
 
 # regiser profile
-@login_required
 def register_profile(request):
      form = UserProfileForm()
      if request.method == 'POST':
@@ -399,3 +399,18 @@ def user_upload(request):
 
     return render(request, 'isthiskeanureeves/upload.html',
                   {'uploads': uploads, 'upload_form': upload_form})
+
+
+@login_required
+def rate_page(request):
+    page_id = None
+    if request.method == 'GET':
+        page_id = request.GET['category_id']
+    rating = 0
+    if page_id:
+        page = Page.objects.get(id=int(page_id))
+        if page:
+            rating = page.rating + 1
+            page.rating = rating
+            page.save()
+    return HttpResponse(likes)

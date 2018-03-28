@@ -30,9 +30,13 @@
 		{% endif %}
 		<div class="col-md-4">
 				<h2>{{ item.0 }}</h2>
-					<a href="{% url 'keanew' %}" >
-					<img class="img-fluid" src="{{ MEDIA_URL}}{{ item.1 }}" alt="{{ item.0 }}" />
-					<p><a class="btn btn-secondary" href="#" role="button">Page &raquo;</a><p>Rating = {{ item.2 }}</p></p>
+					 <!--<a href="{% url 'keanew' %}" >-->
+					<img class="img-fluid" src="{{ MEDIA_URL}}{{ item.1 }}" alt="Picture of a keanu" />
+					{% if user.is_authenticated %}
+					<p><button id="likes" data-catid="{{category.id}}"class="btn btn-outline-primary btn-sm" type="button">This is Keanu</button>
+					<button id="dislikes" data-catid="{{category.id}}"class="btn btn-outline-danger btn-sm" type="button">Not Keanu</button></p>
+					 <p>Keanu-meter = {{ item.2 }}</p>
+					{% endif %}
 					
 			</div>
 		

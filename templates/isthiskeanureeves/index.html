@@ -20,13 +20,9 @@
       </div>
 	  </div>
 	{% endblock %}
+	<h4 > You take the red pill—you stay in Wonderland, and I show you how deep the rabbit hole goes.</h4>
 	{% block body_block %}
 	
-
-	  
-	  
-	  
-	  
 	  
     <!--<div class="container">-->
 	<div class="container">
@@ -40,9 +36,13 @@
 		{% endif %}
 		<div class="col-md-4">
 				<h2>{{ item.0 }}</h2>
-					<a href="{% url 'index' %}" >
+					  <!--<a href="{% url 'index' %}" >-->
 					<img class="img-fluid" src="{{ MEDIA_URL}}{{ item.1 }}" alt="Picture of a keanu" />
-					<p><a class="btn btn-secondary" href="#" role="button">Page &raquo;</a><p>Rating = {{ item.2 }}</p></p>
+					{% if user.is_authenticated %}
+					<p><button id="likes" data-catid="{{category.id}}"class="btn btn-outline-primary btn-sm" type="button">This is Keanu</button>
+					<button id="dislikes" data-catid="{{category.id}}"class="btn btn-outline-danger btn-sm" type="button">Not Keanu</button></p>
+					 <p id="like_count">Keanu-meter = {{ item.2 }}</p>
+					{% endif %}
 					
 			</div>
 		
@@ -55,9 +55,7 @@
 		<div class="row">
 		<br>
 		
-		<h4 > 
 		
-		You take the red pill—you stay in Wonderland, and I show you how deep the rabbit hole goes.</h4>
 	  </div>
 	    </div>
 
