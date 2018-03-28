@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 {% extends 'isthiskeanureeves/base_boot-strap.html' %}
 {% load staticfiles %}
 
@@ -7,18 +6,19 @@
 	Upload
 {% endblock %}
 {% block body_block %}
-	<!--Checks if a user is logged in, if not they will be asked before viewing this page-->
+	
 	{% if user.is_authenticated %}
-	<!--Here's the form for uploading a new picture-->
+	
 	<div class="header text-center px-3 py-3 pt-md-5 pb-md-4 mx-auto">
         <h3 class="display-4">Share your keanureeves!</h3>
 	       <div class="form-body">
-		      <form id="upload_rm" method="post" action="{% url 'upload' %}"
-			      enctype="multipart/form-data">
-		            {% csrf_token %}
-		            {{ upload_form.as_p }}
-
-		<input id = "tick" type="image" name="submit" value="Upload" src = "{{ MEDIA_URL }}uploadbtn.jpg"/>
+		      <form method="POST" action="{% url 'upload' %}" enctype="multipart/form-data">
+              <strong>Upload file:</strong> 
+			  {% csrf_token %}
+			  {{ upload_form.as_p }}
+              <input type="file" name="file" />
+                        <input type="submit" style="float:right;" value="Upload" />
+              </form>
 	        </div>
 	
 	{% else %}
@@ -27,4 +27,25 @@
 		</p>
 	{% endif %}
 	</div>
+    {% if uploads %}
+	<div class = "categorySection">
+	<h1> Previous Uploads </h1>
+</div>
+			<div class = "cardunit">
+			{% for upload in uploads %}
+			<div class = "smallcard" id = "myBtn">
+				<div class = "smallpet">
+					<img src="{{ MEDIA_URL }}{{ upload.picture }}"
+					alt="Picture of {{ upload.name }}">
+				</div>
+				<h1>{{ upload.name }}</h1>
+				<br>
+				<h4>{{ upload.category }}</h4>
+		</div>
+					{% endfor %}
+		</div>
+	{% else %}
+		<p>No Uploads</p>
+	{% endif %}
+
 {% endblock %}
