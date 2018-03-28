@@ -18,7 +18,6 @@ $ pip install -r requirements.txt
 
 
 EXTERNAL SOURCES
- bootstrapper version 4
- for css and ajax scripts in responsive page design
+ bootstrapper version 4 for responsive css and a drop down menu ajax script
  
  
