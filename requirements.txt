@@ -3,4 +3,4 @@ pillow == latest
 django-registration-redux == latest
 django-bootstrap-toolkit == latest
 Python == 3.6
-
+pip install django-star-ratings
